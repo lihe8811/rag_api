@@ -17,7 +17,7 @@ jobs:
     if: ${{ github.event.repository.fork }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Clean issue notice
         uses: actions-cool/issues-helper@v3
@@ -27,9 +27,9 @@ jobs:
 
       - name: Sync upstream changes
         id: sync
-        uses: aormsby/Fork-Sync-With-Upstream-action@v3.4
+        uses: aormsby/Fork-Sync-With-Upstream-action@v3.4.2
         with:
-          upstream_sync_repo: danny-avila/rag_api
+          upstream_sync_repo: danny-avila/LibreChat
           upstream_sync_branch: main
           target_sync_branch: main
           target_repo_token: ${{ secrets.PAT }} # automatically generated, no need to set
@@ -40,7 +40,5 @@ jobs:
         uses: actions-cool/issues-helper@v3
         with:
           actions: 'create-issue'
-          title: '🚨 Sync Fail'
+          title: '🚨 同步失败 | Sync Fail'
           labels: '🚨 Sync Fail'
-          body: |
-            Due to a change in the workflow file of the [LibreChat][lobechat] upstream repository, GitHub has automatically suspended the scheduled automatic update. You need to manually sync your fork. Please refer to the detailed [Tutorial][tutorial-en-US] for instructions.
